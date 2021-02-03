@@ -15,8 +15,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: CalculatorApp(),
-    );
+        home: CalculatorApp(),
+         
+        debugShowCheckedModeBanner: false);
   }
 }
 
@@ -106,15 +107,20 @@ class _CalculatorAppState extends State<CalculatorApp> {
                 Padding(
                   padding: const EdgeInsets.all(12.0),
                   child: Container(
+                    width: _width - 80,
+                    color: Colors.transparent,
                     height: _height / 5,
                     child: Text(
                       _expression,
                       style: TextStyle(color: Colors.white, fontSize: 50),
                     ),
-                    alignment: Alignment(1, 1),
+                    alignment: Alignment.centerRight,
                   ),
                 ),
-               Backspace(callback: backspace,text: 'backspace',) 
+                Backspace(
+                  callback: backspace,
+                  text: 'backspace',
+                )
               ],
             ),
             Row(
@@ -291,20 +297,21 @@ class _CalculatorAppState extends State<CalculatorApp> {
 
 class Backspace extends StatelessWidget {
   final Icon icon;
-    final Function callback;
-      final String text;
-
+  final Function callback;
+  final String text;
 
   const Backspace({Key key, this.icon, this.text, this.callback})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Colors.transparent,
+      alignment: Alignment.bottomRight,
       child: IconButton(
           icon: Icon(
             Icons.backspace,
-            size: 12,
+            size: 40,
+            color: Colors.white,
           ),
           onPressed: () {
             callback(text);
