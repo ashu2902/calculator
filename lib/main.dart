@@ -49,6 +49,14 @@ class _CalculatorAppState extends State<CalculatorApp> {
     });
   }
 
+  void backspace(String text) {
+    setState(() {
+      if (text == 'backspace') {
+        _expression = _expression.substring(0, _expression.length - 1);
+      }
+    });
+  }
+
   void evaluate(String text) {
     Parser p = Parser();
     Expression exp = p.parse(_expression);
@@ -65,12 +73,23 @@ class _CalculatorAppState extends State<CalculatorApp> {
   Widget build(BuildContext context) {
     final _height = MediaQuery.of(context).size.height;
     final _width = MediaQuery.of(context).size.width;
+
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.black87,
+        shadowColor: Colors.grey,
+        elevation: 10,
+        title: Text(
+          'Calculator',
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
       backgroundColor: Colors.black,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
+          children: [
             Padding(
               padding: const EdgeInsets.only(right: 12),
               child: Container(
@@ -82,23 +101,22 @@ class _CalculatorAppState extends State<CalculatorApp> {
                 alignment: Alignment(1, 1),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Container(
-                height: _height / 5,
-                child: Text(
-                  _expression,
-                  style: TextStyle(color: Colors.white, fontSize: 50),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: Container(
+                    height: _height / 5,
+                    child: Text(
+                      _expression,
+                      style: TextStyle(color: Colors.white, fontSize: 50),
+                    ),
+                    alignment: Alignment(1, 1),
+                  ),
                 ),
-                alignment: Alignment(1, 1),
-              ),
+               Backspace(callback: backspace,text: 'backspace',) 
+              ],
             ),
-            // SizedBox(
-            //   height: _height / 20,
-            //   child: Container(
-            //     color: Colors.transparent,
-            //   ),
-            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -113,7 +131,7 @@ class _CalculatorAppState extends State<CalculatorApp> {
                   text: 'C',
                   fillColor: 0xFFb2fdff,
                   textColor: 0xFF000000,
-                  fontSize: 46,
+                  fontSize: 36,
                   callback: clear,
                 ),
                 CalculatorButton(
@@ -121,14 +139,14 @@ class _CalculatorAppState extends State<CalculatorApp> {
                   fillColor: 0xFFFFFFFF,
                   textColor: 0xFF000000,
                   callback: numClick,
-                  fontSize: 46,
+                  fontSize: 36,
                 ),
                 CalculatorButton(
                   text: '/',
                   fillColor: 0xFFFFFFFF,
                   callback: numClick,
                   textColor: 0xFF000000,
-                  fontSize: 46,
+                  fontSize: 36,
                 ),
               ],
             ),
@@ -140,28 +158,28 @@ class _CalculatorAppState extends State<CalculatorApp> {
                   fillColor: 0xFF818180,
                   callback: numClick,
                   textColor: 0xFF000000,
-                  fontSize: 46,
+                  fontSize: 36,
                 ),
                 CalculatorButton(
                   text: '8',
                   fillColor: 0xFF818180,
                   textColor: 0xFF000000,
                   callback: numClick,
-                  fontSize: 46,
+                  fontSize: 36,
                 ),
                 CalculatorButton(
                   text: '9',
                   fillColor: 0xFF818180,
                   callback: numClick,
                   textColor: 0xFF000000,
-                  fontSize: 46,
+                  fontSize: 36,
                 ),
                 CalculatorButton(
                   text: '*',
                   fillColor: 0xFFFFFFFF,
                   textColor: 0xFF000000,
                   callback: numClick,
-                  fontSize: 46,
+                  fontSize: 36,
                 ),
               ],
             ),
@@ -172,7 +190,7 @@ class _CalculatorAppState extends State<CalculatorApp> {
                   text: '4',
                   fillColor: 0xFF818180,
                   textColor: 0xFF000000,
-                  fontSize: 46,
+                  fontSize: 36,
                   callback: numClick,
                 ),
                 CalculatorButton(
@@ -180,21 +198,21 @@ class _CalculatorAppState extends State<CalculatorApp> {
                   fillColor: 0xFF818180,
                   textColor: 0xFF000000,
                   callback: numClick,
-                  fontSize: 46,
+                  fontSize: 36,
                 ),
                 CalculatorButton(
                   text: '6',
                   fillColor: 0xFF818180,
                   callback: numClick,
                   textColor: 0xFF000000,
-                  fontSize: 46,
+                  fontSize: 36,
                 ),
                 CalculatorButton(
                   text: '-',
                   fillColor: 0xFFFFFFFF,
                   callback: numClick,
                   textColor: 0xFF000000,
-                  fontSize: 46,
+                  fontSize: 36,
                 ),
               ],
             ),
@@ -205,28 +223,28 @@ class _CalculatorAppState extends State<CalculatorApp> {
                   text: '1',
                   fillColor: 0xFF818180,
                   textColor: 0xFF000000,
-                  fontSize: 46,
+                  fontSize: 36,
                   callback: numClick,
                 ),
                 CalculatorButton(
                   text: '2',
                   fillColor: 0xFF818180,
                   textColor: 0xFF000000,
-                  fontSize: 46,
+                  fontSize: 36,
                   callback: numClick,
                 ),
                 CalculatorButton(
                   text: '3',
                   fillColor: 0xFF818180,
                   textColor: 0xFF000000,
-                  fontSize: 46,
+                  fontSize: 38,
                   callback: numClick,
                 ),
                 CalculatorButton(
                   text: '+',
                   fillColor: 0xFFFFFFFF,
                   textColor: 0xFF000000,
-                  fontSize: 46,
+                  fontSize: 36,
                   callback: numClick,
                 ),
               ],
@@ -238,13 +256,13 @@ class _CalculatorAppState extends State<CalculatorApp> {
                   text: '.',
                   fillColor: 0xFF818180,
                   textColor: 0xFF000000,
-                  fontSize: 46,
+                  fontSize: 36,
                   callback: numClick,
                 ),
                 CalculatorButton(
                   text: '0',
                   fillColor: 0xFF818180,
-                  fontSize: 46,
+                  fontSize: 36,
                   textColor: 0xFF000000,
                   callback: numClick,
                 ),
@@ -253,20 +271,44 @@ class _CalculatorAppState extends State<CalculatorApp> {
                   fillColor: 0xFF818180,
                   textColor: 0xFF000000,
                   callback: numClick,
-                  fontSize: 42,
+                  fontSize: 38,
                 ),
                 CalculatorButton(
                   text: '=',
                   fillColor: 0xFFFFFFFF,
                   textColor: 0xFF000000,
                   callback: evaluate,
-                  fontSize: 46,
+                  fontSize: 36,
                 ),
               ],
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class Backspace extends StatelessWidget {
+  final Icon icon;
+    final Function callback;
+      final String text;
+
+
+  const Backspace({Key key, this.icon, this.text, this.callback})
+      : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      child: IconButton(
+          icon: Icon(
+            Icons.backspace,
+            size: 12,
+          ),
+          onPressed: () {
+            callback(text);
+          }),
     );
   }
 }

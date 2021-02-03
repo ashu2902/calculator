@@ -6,10 +6,12 @@ class CalculatorButton extends StatelessWidget {
   final int fillColor;
   final double fontSize;
   final Function callback;
+  final Icon icon;
 
   const CalculatorButton(
       {Key key,
       this.fillColor,
+      this.icon,
       this.text,
       this.textColor,
       this.fontSize,
@@ -20,9 +22,9 @@ class CalculatorButton extends StatelessWidget {
     final _height = MediaQuery.of(context).size.height;
     final _width = MediaQuery.of(context).size.width;
     return Container(
-      margin: EdgeInsets.all(8),
+      margin: EdgeInsets.all(4),
       child: SizedBox(
-        width: _width / 5,
+        width: _width / 4.75,
         height: _height / 11,
         child: FlatButton(
           shape: RoundedRectangleBorder(
@@ -42,5 +44,16 @@ class CalculatorButton extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget backspaceIcon(BuildContext context) {
+    return Container(
+        child: IconButton(
+      icon: icon,
+      iconSize: 10,
+      onPressed: () {
+        callback(text);
+      },
+    ));
   }
 }
